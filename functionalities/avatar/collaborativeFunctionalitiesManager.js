@@ -145,6 +145,11 @@ CollaborativeFunctionalitiesManager.prototype.addFunctionalitiesIncompleteFromFu
 	this.functionalitiesIncompleteFromFunctionalitiesRepository = uniqueArray(this.functionalitiesIncompleteFromFunctionalitiesRepository);
 }
 
+// Delete all executable functionality
+CollaborativeFunctionalitiesManager.prototype.deleteFunctionalityComposedWithOtherAvatars = function(){
+	this.functionalitiesComposedWithOtherAvatars = [];
+}
+
 // Add an executable functionality
 CollaborativeFunctionalitiesManager.prototype.addFunctionalityComposedWithOtherAvatars = function(functionality){
 	this.functionalitiesComposedWithOtherAvatars.push(functionality);

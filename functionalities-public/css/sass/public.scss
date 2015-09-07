@@ -143,6 +143,9 @@ input::-moz-focus-inner {
 	&.objectActivate {
 		background: $graylight;
 	}
+	&.objectActivateDelete {
+		background: $yellow;
+	}
 }
 
 .functionalitiesWrapper {

@@ -189,17 +189,21 @@ input::-moz-focus-inner {
 .objectName.objectActivate {
   background: #999999;
 }
+/* line 146, ../sass/public.scss */
+.objectName.objectActivateDelete {
+  background: #dcbd15;
+}
 
-/* line 148, ../sass/public.scss */
+/* line 151, ../sass/public.scss */
 .functionalitiesWrapper {
   font-family: "Source Code Pro", sans-serif;
 }
-/* line 150, ../sass/public.scss */
+/* line 153, ../sass/public.scss */
 .functionalitiesWrapper .functionalitiesLeft {
   margin-bottom: 10px;
 }
 
-/* line 158, ../sass/public.scss */
+/* line 161, ../sass/public.scss */
 .avatarsList .avatar {
   padding: 20px;
   background: #677485;
@@ -210,14 +214,14 @@ input::-moz-focus-inner {
   border-radius: 5px;
   margin-bottom: 20px;
 }
-/* line 165, ../sass/public.scss */
+/* line 168, ../sass/public.scss */
 .avatarsList h2 {
   padding-bottom: 5px;
   font-weight: bold;
   font-size: 0.9em;
   color: #8bbcb9;
 }
-/* line 171, ../sass/public.scss */
+/* line 174, ../sass/public.scss */
 .avatarsList .avatarName {
   font-size: 1.2em;
   font-weight: bold;
@@ -225,59 +229,59 @@ input::-moz-focus-inner {
   margin-bottom: 10px;
   border-bottom: 1px solid white;
 }
-/* line 178, ../sass/public.scss */
+/* line 181, ../sass/public.scss */
 .avatarsList .avatarDescription {
   padding-bottom: 5px;
   font-size: 0.8em;
   font-style: italic;
 }
-/* line 183, ../sass/public.scss */
+/* line 186, ../sass/public.scss */
 .avatarsList .avatarId {
   font-family: "Source Code Pro", sans-serif;
   font-size: 0.8em;
   color: white;
   cursor: pointer;
 }
-/* line 188, ../sass/public.scss */
+/* line 191, ../sass/public.scss */
 .avatarsList .avatarId:hover {
   text-decoration: underline;
 }
-/* line 192, ../sass/public.scss */
+/* line 195, ../sass/public.scss */
 .avatarsList a {
   color: #8bbcb9;
   font-weight: normal;
 }
-/* line 195, ../sass/public.scss */
+/* line 198, ../sass/public.scss */
 .avatarsList a:hover {
   text-decoration: underline;
 }
-/* line 199, ../sass/public.scss */
+/* line 202, ../sass/public.scss */
 .avatarsList .exposedFunctionalitiesSection {
   padding-top: 20px;
   margin-top: 20px;
   border-top: 1px dotted #465262;
 }
 
-/* line 205, ../sass/public.scss */
+/* line 208, ../sass/public.scss */
 .functionality {
   font-size: 0.7em;
   font-family: "Source Code Pro", sans-serif;
   padding: 3px 0px;
   padding-left: 30px;
 }
-/* line 210, ../sass/public.scss */
+/* line 213, ../sass/public.scss */
 .functionality.functionalityLocal {
   color: #fffbad;
 }
-/* line 213, ../sass/public.scss */
+/* line 216, ../sass/public.scss */
 .functionality.functionalityOther {
   color: #cccccc;
 }
-/* line 216, ../sass/public.scss */
+/* line 219, ../sass/public.scss */
 .functionality.functionalityFound {
   color: #b2ffd8;
 }
-/* line 220, ../sass/public.scss */
+/* line 223, ../sass/public.scss */
 .functionality .functionalityDocumentation,
 .functionality .functionalityExecute {
   cursor: pointer;
@@ -294,19 +298,19 @@ input::-moz-focus-inner {
   -ms-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 231, ../sass/public.scss */
+/* line 234, ../sass/public.scss */
 .functionality .functionalityDocumentation:hover,
 .functionality .functionalityExecute:hover {
   background: #3a6e81;
 }
-/* line 235, ../sass/public.scss */
+/* line 238, ../sass/public.scss */
 .functionality .functionalityAction {
   width: 82%;
   float: right;
   padding: 3px 0px;
 }
 
-/* line 242, ../sass/public.scss */
+/* line 245, ../sass/public.scss */
 .responseInfo {
   padding: 20px;
   background: white;
@@ -319,7 +323,7 @@ input::-moz-focus-inner {
   border-radius: 5px;
 }
 
-/* line 251, ../sass/public.scss */
+/* line 254, ../sass/public.scss */
 .footer {
   padding: 50px 0px;
   text-align: center;
@@ -327,14 +331,14 @@ input::-moz-focus-inner {
   font-size: 0.8em;
 }
 
-/* line 260, ../sass/public.scss */
+/* line 263, ../sass/public.scss */
 .modalWindow,
 .modalWindowBig {
   width: 900px;
   padding: 20px;
   background: #efefef;
 }
-/* line 264, ../sass/public.scss */
+/* line 267, ../sass/public.scss */
 .modalWindow .modalTitle,
 .modalWindowBig .modalTitle {
   font-weight: bold;
@@ -344,7 +348,7 @@ input::-moz-focus-inner {
   text-transform: uppercase;
   padding-bottom: 20px;
 }
-/* line 272, ../sass/public.scss */
+/* line 275, ../sass/public.scss */
 .modalWindow .modalClose,
 .modalWindowBig .modalClose {
   width: 30px;
@@ -355,7 +359,7 @@ input::-moz-focus-inner {
   right: 10px;
   cursor: pointer;
 }
-/* line 281, ../sass/public.scss */
+/* line 284, ../sass/public.scss */
 .modalWindow .messageTitle,
 .modalWindowBig .messageTitle {
   text-align: center;
@@ -363,24 +367,24 @@ input::-moz-focus-inner {
   padding-bottom: 20px;
   font-weight: bold;
 }
-/* line 287, ../sass/public.scss */
+/* line 290, ../sass/public.scss */
 .modalWindow .messageTitleError,
 .modalWindowBig .messageTitleError {
   color: #ed001b;
 }
-/* line 290, ../sass/public.scss */
+/* line 293, ../sass/public.scss */
 .modalWindow .messageCode,
 .modalWindowBig .messageCode {
   font-family: "Source Code Pro", sans-serif;
   font-size: 0.8em;
   padding: 0.3em 0;
 }
-/* line 295, ../sass/public.scss */
+/* line 298, ../sass/public.scss */
 .modalWindow .messageCodeTitle,
 .modalWindowBig .messageCodeTitle {
   color: #0367b2;
 }
-/* line 298, ../sass/public.scss */
+/* line 301, ../sass/public.scss */
 .modalWindow input.formSubmit,
 .modalWindowBig input.formSubmit {
   display: block;
@@ -403,18 +407,18 @@ input::-moz-focus-inner {
   -ms-transition: 0.5s ease;
   transition: 0.5s ease;
 }
-/* line 312, ../sass/public.scss */
+/* line 315, ../sass/public.scss */
 .modalWindow input.formSubmit:hover,
 .modalWindowBig input.formSubmit:hover {
   background: #0367b2;
 }
 
-/* line 317, ../sass/public.scss */
+/* line 320, ../sass/public.scss */
 .modalWindowBig {
   width: 1000px;
 }
 
-/* line 321, ../sass/public.scss */
+/* line 324, ../sass/public.scss */
 .code {
   font-family: "Source Code Pro", sans-serif;
   font-size: 0.8em;
@@ -425,7 +429,7 @@ input::-moz-focus-inner {
   word-wrap: break-word;
 }
 
-/* line 331, ../sass/public.scss */
+/* line 334, ../sass/public.scss */
 .messageCodeArgumentsTitle {
   font-weight: bold;
   padding: 10px 0px;
@@ -433,7 +437,7 @@ input::-moz-focus-inner {
   color: #24b375;
 }
 
-/* line 337, ../sass/public.scss */
+/* line 340, ../sass/public.scss */
 .codeOption {
   width: 400px;
   float: left;
@@ -444,38 +448,38 @@ input::-moz-focus-inner {
   margin: 10px 5px;
   margin-top: 0px;
 }
-/* line 346, ../sass/public.scss */
+/* line 349, ../sass/public.scss */
 .codeOption label {
   font-weight: bold;
 }
-/* line 349, ../sass/public.scss */
+/* line 352, ../sass/public.scss */
 .codeOption .messageCodeChoiceDescription {
   font-size: 0.9em;
   color: #333333;
   font-style: italic;
   padding-top: 5px;
 }
-/* line 354, ../sass/public.scss */
+/* line 357, ../sass/public.scss */
 .codeOption .messageCodeChoiceDescription label {
   padding-right: 10px;
 }
-/* line 358, ../sass/public.scss */
+/* line 361, ../sass/public.scss */
 .codeOption .codeOptionArgument {
   padding: 10px 20px;
 }
 
-/* line 362, ../sass/public.scss */
+/* line 365, ../sass/public.scss */
 .argument {
   padding: 5px 0px;
 }
-/* line 364, ../sass/public.scss */
+/* line 367, ../sass/public.scss */
 .argument label {
   display: block;
   padding-bottom: 3px;
   font-size: 0.8em;
   color: #333333;
 }
-/* line 369, ../sass/public.scss */
+/* line 372, ../sass/public.scss */
 .argument label strong {
   display: block;
   font-size: 1.1em;

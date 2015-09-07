@@ -9,7 +9,7 @@ $(document).ready(function() {
 	reloadAvatars();
 	reloadAvatarsInterval = setInterval(function(){
 			reloadAvatars();
-		}, 20000);
+		}, 2000);
 
 });
 
@@ -21,17 +21,27 @@ function activateAjax() {
 		evt.stopImmediatePropagation();
 		evt.preventDefault();
 		var idAvatarRel = self.attr('rel');
-		$.ajax({
-			url: urlAvatars,
-			type: 'PUT',
-			data: {urlCima: idAvatarRel},
-			success: function(response) {
-				if (response!=null) {
-					self.removeClass('objectActivate');
+		if (self.hasClass('objectActivateDelete')) {
+			self.removeClass('objectActivateDelete');
+			$.ajax({
+				url: urlAvatars,
+				type: 'DELETE',
+				data: {urlCima: idAvatarRel}
+			});
+			reloadAvatars();
+		} else {
+			$.ajax({
+				url: urlAvatars,
+				type: 'PUT',
+				data: {urlCima: idAvatarRel},
+				success: function(response) {
+					if (response!=null) {
+						self.addClass('objectActivateDelete');
+					}
+					reloadAvatars();
 				}
-				reloadAvatars();
-			}
-		});
+			});			
+		}
 	});
 
 	// Show the info in a modal window
@@ -123,6 +133,19 @@ function reloadObjects() {
 function reloadAvatars() {
 	$.get(urlAvatarsHtml, {}, function(response){
 		$('.avatars').html(response);
+		//Activate buttons
+		$('.objectName').removeClass('objectActivateDelete');
+		$('.objectName').each(function(index, ele){
+			var idObjectArray = $(ele).attr('rel').split('/');
+			var idObject = idObjectArray[idObjectArray.length - 1];
+			$('.avatarId').each(function(indexIns, eleIns){
+				var idAvatarArray = $(eleIns).attr('rel').split('/');
+				var idAvatar = idAvatarArray[idAvatarArray.length - 1];
+				if (idObject == idAvatar) {
+					$(ele).addClass('objectActivateDelete');
+				}
+			});
+		});
 		activateAjax();
 	});	
 }

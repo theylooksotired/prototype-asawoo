@@ -42,14 +42,6 @@ var server = app.listen(portListen, function () {
 })
 
 
-//avatars.push(new Avatar('http://localhost:3333/cima/coolerheater-swirlwind-2665'));
-//avatars.push(new Avatar('http://localhost:3333/cima/heater-tesco-2336'));
-//avatars.push(new Avatar('http://localhost:3333/cima/sensor-ge-2442'));
-//avatars.push(new Avatar('http://localhost:3333/cima/motor-ge-3343'));
-//avatars.push(new Avatar('http://localhost:3333/cima/window-ikea-2555'));
-//avatars.push(new Avatar('http://localhost:3333/cima/phone-samsung-2554'));
-
-
 /*---HYDRA---*/
 
 // GET the hydra vocabulary 
@@ -120,57 +112,7 @@ app.put('/expose-functionalities', function(request, response, next) {
 	if (!itemExists) {
 		functionalitiesRegistry.push(functionalitiesExposed);
 	}
-	// Find all the composed functionalities in the environement
-	if (!functionalitiesRegistry.executableComposedFunctionalities) {
-		functionalitiesRegistry.executableComposedFunctionalities = [];
-	}
-	var allComposedFunctionalities = [];
-	for (i in functionalitiesRegistry) {
-		for (j in functionalitiesRegistry[i].functionalitiesIncomplete) {
-			var itemExists = false;
-			for (k in allComposedFunctionalities) {
-				if (allComposedFunctionalities[k].id == functionalitiesRegistry[i].functionalitiesIncomplete[j].id) {
-					itemExists = true;
-				}
-			}
-			if (!itemExists) {
-				allComposedFunctionalities.push(functionalitiesRegistry[i].functionalitiesIncomplete[j]);
-			}
-		}
-	}
-	// Find all the simple functionalities in the environement
-	var allSimpleFunctionalities = [];
-	for (i in functionalitiesRegistry) {
-		for (j in functionalitiesRegistry[i].functionalities) {
-			allSimpleFunctionalities.push(functionalitiesRegistry[i].functionalities[j]);
-		}
-	}
-	allSimpleFunctionalities = uniqueArray(allSimpleFunctionalities);
-	// Check if there are composed functionalities that can be executed
-	for (i in allComposedFunctionalities) {
-		var itemsNeeded = 0;
-		for (j in allComposedFunctionalities[i].isComposedOf) {
-			for (k in allSimpleFunctionalities) {
-				if (allComposedFunctionalities[i].isComposedOf[j] == allSimpleFunctionalities[k]) {
-					itemsNeeded++;
-				}
-			}
-		}
-		if (itemsNeeded == allComposedFunctionalities[i].isComposedOf.length) {
-			functionalitiesRegistry.executableComposedFunctionalities.push(allComposedFunctionalities[i].id);
-		}
-	}
-	// Tell to all the avatars concerned that they can execute the composed functionalities
-	for (i in functionalitiesRegistry.executableComposedFunctionalities) {
-		for (j in avatars) {
-			var avatarIncompleteFunctionalities = avatars[j].collaborativeFunctionalitiesManager.getFunctionalitiesIncompleteFromFunctionalitiesRepository();
-			for (k in avatarIncompleteFunctionalities) {
-				if (avatarIncompleteFunctionalities[k].id == functionalitiesRegistry.executableComposedFunctionalities[i]) {
-					avatars[j].collaborativeFunctionalitiesManager.addFunctionalityComposedWithOtherAvatars(avatarIncompleteFunctionalities[k].id);
-				}
-			}
-		}
-	}
+	updateFunctionalities();
 	response.send(functionalitiesRegistry);
 });
 
@@ -231,6 +173,27 @@ app.put('/avatars', function(request, response, next) {
 	response.writeHead(200, {"Content-Type": "application/ld+json",
                                 "Link": linkVocab});
 	response.end(JSON.stringify(responseCreated));
+});
+// DELETE to delete an avatar
+app.delete('/avatars', function(request, response, next) {
+	var urlCima = request.body.urlCima;
+	var responseCreated = {};
+	if (urlCima) {
+		for (i in avatars) {
+			if (avatars[i].urlCimaObject == urlCima) {
+				avatars.splice(i, 1);
+			}
+		}
+		for (i in functionalitiesRegistry) {
+			if (functionalitiesRegistry[i].idAvatar == findId(urlCima)) {
+				functionalitiesRegistry.splice(i, 1);
+			}
+		}
+		updateFunctionalities();
+	}
+	response.writeHead(200, {"Content-Type": "application/ld+json",
+                                "Link": linkVocab});
+	response.end('');
 });
 // GET a simple Avatar
 app.get('/avatar/:idAvatar', function(request, response, next) {
@@ -326,6 +289,63 @@ app.all('/*', function(request, response, next) {
 
 
 // EXTRA FUNCTIONS
+function updateFunctionalities() {
+	// Find all the composed functionalities in the environement
+	//if (!functionalitiesRegistry.executableComposedFunctionalities) {
+		functionalitiesRegistry.executableComposedFunctionalities = [];
+	//}
+	var allComposedFunctionalities = [];
+	for (i in functionalitiesRegistry) {
+		for (j in functionalitiesRegistry[i].functionalitiesIncomplete) {
+			var itemExists = false;
+			for (k in allComposedFunctionalities) {
+				if (allComposedFunctionalities[k].id == functionalitiesRegistry[i].functionalitiesIncomplete[j].id) {
+					itemExists = true;
+				}
+			}
+			if (!itemExists) {
+				allComposedFunctionalities.push(functionalitiesRegistry[i].functionalitiesIncomplete[j]);
+			}
+		}
+	}
+	// Find all the simple functionalities in the environement
+	var allSimpleFunctionalities = [];
+	for (i in functionalitiesRegistry) {
+		for (j in functionalitiesRegistry[i].functionalities) {
+			allSimpleFunctionalities.push(functionalitiesRegistry[i].functionalities[j]);
+		}
+	}
+	allSimpleFunctionalities = uniqueArray(allSimpleFunctionalities);
+	// Check if there are composed functionalities that can be executed
+	for (i in allComposedFunctionalities) {
+		var itemsNeeded = 0;
+		for (j in allComposedFunctionalities[i].isComposedOf) {
+			for (k in allSimpleFunctionalities) {
+				if (allComposedFunctionalities[i].isComposedOf[j] == allSimpleFunctionalities[k]) {
+					itemsNeeded++;
+				}
+			}
+		}
+		if (itemsNeeded == allComposedFunctionalities[i].isComposedOf.length) {
+			functionalitiesRegistry.executableComposedFunctionalities.push(allComposedFunctionalities[i].id);
+		}
+	}
+	// Tell to all the avatars concerned that they can execute the composed functionalities
+	for (j in avatars) {
+		avatars[j].collaborativeFunctionalitiesManager.deleteFunctionalityComposedWithOtherAvatars();
+	}
+	for (i in functionalitiesRegistry.executableComposedFunctionalities) {
+		for (j in avatars) {
+			var avatarIncompleteFunctionalities = avatars[j].collaborativeFunctionalitiesManager.getFunctionalitiesIncompleteFromFunctionalitiesRepository();
+			for (k in avatarIncompleteFunctionalities) {
+				if (avatarIncompleteFunctionalities[k].id == functionalitiesRegistry.executableComposedFunctionalities[i]) {
+					avatars[j].collaborativeFunctionalitiesManager.addFunctionalityComposedWithOtherAvatars(avatarIncompleteFunctionalities[k].id);
+				}
+			}
+		}
+	}
+}
+
 function findAvatar(idAvatar) {
 	for (i in avatars) {
 		if (avatars[i].id == idAvatar || avatars[i].urlCimaObject == idAvatar) {
@@ -481,4 +501,9 @@ function uniqueArray(array, placeholder, index) {
 				array[placeholder] !== array[index] || array.splice(index,1);
 	}
 	return array
+}
+
+function findId(urlFind) {
+	var arrayUrl = urlFind.split('/');
+	return arrayUrl[arrayUrl.length - 1];
 }
